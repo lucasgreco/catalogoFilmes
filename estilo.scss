@@ -16,6 +16,18 @@ h1 {
   text-align: center;
 }
 
+video{
+  width: 100%;
+  height: auto;
+  justify-content: center;
+}
+
+.maluco{
+margin: auto;
+width: 60%;
+padding: 10px; 
+}
+
 .wrapper {
   display: grid;
   grid-template-columns: repeat(3,100%);
