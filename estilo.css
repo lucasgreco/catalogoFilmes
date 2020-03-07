@@ -4,29 +4,27 @@ html {
 
 body {
   margin: 0;
-  /* background-color: #303030; */
-  background: rgb(48,48,48);
-  background: radial-gradient(circle, rgba(48,48,48,0.8883928571428571) 0%, rgba(0,0,0,1) 100%);
+  background-color: #000;
 }
 
 h1 {
   font-family: Arial;
   color: red;
   text-align: center;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
-video{
-    width: 100%;
-    height: auto;
-    justify-content: center;
+video {
+  width: 100%;
+  height: auto;
+  justify-content: center;
 }
 
-.maluco{
+.maluco {
   margin: auto;
   width: 60%;
-  padding: 10px; 
+  padding: 10px;
 }
+
 .wrapper {
   display: grid;
   grid-template-columns: repeat(3, 100%);
