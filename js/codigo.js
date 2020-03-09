@@ -1,57 +1,15 @@
-var subtitles = document.getElementById('subtitles');
+var client = new WebTorrent()
 
-for (var i = 0; i < video.textTracks.length; i++) {
-    video.textTracks[i].mode = 'hidden';
- }
+// Sintel, a free, Creative Commons movie
+var torrentId = 'magnet:?xt=urn:btih:1D53B654FA5031AECC5AC6DAB1F00F773E69B176&dn=Boogie%20Nights%20%281997%29%20%5bBluRay%5d%20%5b1080p%5d%20%5bYTS.AM%5d'
 
- var subtitlesMenu;
-if (video.textTracks) {
-   var df = document.createDocumentFragment();
-   var subtitlesMenu = df.appendChild(document.createElement('ul'));
-   subtitlesMenu.className = 'subtitles-menu';
-   subtitlesMenu.appendChild(createMenuItem('subtitles-off', '', 'Off'));
-   for (var i = 0; i < video.textTracks.length; i++) {
-      subtitlesMenu.appendChild(createMenuItem('subtitles-' + video.textTracks[i].language, video.textTracks[i].language, video.textTracks[i].label));
-   }
-   videoContainer.appendChild(subtitlesMenu);
-}
+client.add(torrentId, function (torrent) {
+  // Torrents can contain many files. Let's use the .mp4 file
+  var file = torrent.files.find(function (file) {
+    return file.name.endsWith('.mp4')
+  })
 
-var subtitleMenuButtons = [];
-var createMenuItem = function(id, lang, label) {
-   var listItem = document.createElement('li');
-   var button = listItem.appendChild(document.createElement('button'));
-   button.setAttribute('id', id);
-   button.className = 'subtitles-button';
-   if (lang.length > 0) button.setAttribute('lang', lang);
-   button.value = label;
-   button.setAttribute('data-state', 'inactive');
-   button.appendChild(document.createTextNode(label));
-   button.addEventListener('click', function(e) {
-      // Set all buttons to inactive
-      subtitleMenuButtons.map(function(v, i, a) {
-         subtitleMenuButtons[i].setAttribute('data-state', 'inactive');
-      });
-      // Find the language to activate
-      var lang = this.getAttribute('lang');
-      for (var i = 0; i < video.textTracks.length; i++) {
-         // For the 'subtitles-off' button, the first condition will never match so all will subtitles be turned off
-         if (video.textTracks[i].language == lang) {
-            video.textTracks[i].mode = 'showing';
-            this.setAttribute('data-state', 'active');
-         }
-         else {
-            video.textTracks[i].mode = 'hidden';
-         }
-      }
-      subtitlesMenu.style.display = 'none';
-   });
-   subtitleMenuButtons.push(button);
-   return listItem;
-}
-
-
-subtitles.addEventListener('click', function(e) {
-    if (subtitlesMenu) {
-       subtitlesMenu.style.display = (subtitlesMenu.style.display == 'block' ? 'none' : 'block');
-    }
- });
+  // Display the file by adding it to the DOM.
+  // Supports video, audio, image files, and more!
+  file.appendTo('body')
+})
